@@ -6,9 +6,13 @@
 import datetime 
 # from progress.bar import Bar
 
-pheno = 'CHD'
-pathout = "/disks/raid5a/szhang/rrintcc/Data_BOOST_Results/"+pheno+"/all_sets/"
-fname = '/disks/raid5a/szhang/rrintcc/Data_BOOST_Results/'+pheno+'/lociPairs_rs_reformated.txt'
+#  pheno = 'CHD'
+#  pathout = "/disks/raid5a/szhang/rrintcc/Data_BOOST_Results/"+pheno+"/all_sets/"
+#  fname = '/disks/raid5a/szhang/rrintcc/Data_BOOST_Results/'+pheno+'/lociPairs_rs_reformated.txt'
+
+pathout = 'all_sets'
+fname = 'lociPairs_rs_reformated.txt'
+
 print "----------------------------------------------------------"
 print "Output path: "+pathout
 print "Locipairs file: "+ fname

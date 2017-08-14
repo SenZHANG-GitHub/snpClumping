@@ -1,0 +1,36 @@
+-----------------------------------------------------------------------------------------
+Procedure:
+1. InteractionRecords.txt -> results_BOOST.txt: ReOrderAndReIndex.py
+2. results_BOOST.txt -> loci files: clumpInteraction.py (Modify region_size, buffer_size, p_thr inside)
+3. loci files -> range_snps.txt, range_snps_rs.txt: snp2region.py
+
+-----------------------------------------------------------------------------------------
+file formats:
+(lociInd are consistent with the order in loci.txt, loci_rs.txt, lociRange.txt, range_snps.txt)
+(one more problem: range_snps_noempty.txt is not needed here, since the loci from BOOST results must be non-empty)
+
+1) results_BOOST.txt
+IND1 IND2 CHISQ SNP1 SNP2 BP1 BP2 pVal CHR1 CHR2
+
+(!!! The rs(SNP1, SNP2) in results_BOOST.txt can be wrong! Since the bp should be accounted for each chr!!!
+-> The rs in results_BOOST.txt are correct -> because both bp and rs are from GBOOST results, which return the index of the snp in .map file, not via matching methods.
+-> Therefore the rs in loci files are ok)
+
+2) loci.txt
+CHR BP1 BP2 BP3 BP4 ....
+
+3) lociRange.txt
+CHR startBP endBP
+
+4) lociPairs.txt (the snps are results from BOOST, not all snps)
+lociInd1 lociInd2 snpPair1_1 snpPair1_2 snpPair2_1 snpPair2_2 snpPair3_1 snpPair3_2 ...
+
+5) lociPairs_rs_reformated.txt (the snps are results from BOOST, not all snps)
+lociInd1 lociInd2 | rssnps in loci1 | rssnps in loci2 
+
+6) range_snps.txt
+CHR startBP endBP numberOfSNPs BP1 BP2 BP3 ...
+
+7) range_snps_rs.txt
+CHR startBP endBP numberOfSNPs rs1 rs2 rs3 ...
+

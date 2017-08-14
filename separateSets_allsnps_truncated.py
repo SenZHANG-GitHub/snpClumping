@@ -3,11 +3,12 @@
 ## This file reads in range_snps.txt and lociPairs.txt file
 ## and then output locipair.set and locipair.snps files
 ################################################################################
-import datetime, sys, os, progressbar
+import datetime, sys, os, progressbar, random
 
-region_size = 500
+region_size = 200
+max_snps 	= 31 # sqrt(1000)
 
-pathout = 'all_sets_'+str(region_size) + 'kbp'
+pathout = 'all_sets_'+str(region_size) + 'kbp_truncated'
 fname = 'MIGen_range_snps_rs_'+str(region_size)+'kbp.txt'
 pairname = 'lociPairs_'+str(region_size) + 'kbp.txt'
 
@@ -16,6 +17,17 @@ if os.path.exists(pathout):
 	os.system('rm -rf '+pathout+'/*.snps')
 else:
 	os.system('mkdir '+pathout)
+
+def truncateSet(all_snpset, snpset, max_snps):
+	if len(all_snpset) <= max_snps:
+		for snp in all_snpset:
+			snpset.append(snp)
+	else:
+		randindices = random.sample(range(len(all_snpset)), max_snps)
+		for k in randindices:
+			snpset.append(all_snpset[k])
+
+
 
 print("----------------------------------------------------------")
 print("Output path: "+pathout)
@@ -41,8 +53,14 @@ with open(pairname, mode = 'r') as f:
 		pairind1 = int(line.split()[0])
 		pairind2 = int(line.split()[1])
 
-		snpset1 = rangelist[pairind1]
-		snpset2 = rangelist[pairind2]
+		all_snpset1 = rangelist[pairind1]
+		all_snpset2 = rangelist[pairind2]
+
+		snpset1 = []
+		snpset2 = []
+
+		truncateSet(all_snpset1, snpset1, max_snps)
+		truncateSet(all_snpset2, snpset2, max_snps)
 
 		fileSet = open(pathout+'/locipair'+str(i)+'.set', mode = 'w')
 		fileSNPs = open(pathout+'/locipair'+str(i)+'.snps', mode = 'w')

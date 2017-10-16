@@ -21,7 +21,7 @@ import gzip, datetime, progressbar
 # 5E-12/58.8745, 5E-13/63.62993, 5E-14/68.37653, BC/67.88988
 # BC (Bonferroni Correction) p-value threshold: 1.074603E-12/62.05125 (p=305054)
 
-p_thr = 5e-8
+p_thr = 5e-9
 chisq_thr = chi2.ppf(1-p_thr, 4)
 region_size = 500 # unit: kbp
 buffer_size = 25  # unit: kbp (upward_buffer = downward_buffer = buffer_size)
@@ -150,16 +150,16 @@ endTime = datetime.datetime.now()
 print('Time for clumping the snps is: ' + str((endTime - startTime).seconds) + 's')
 
 ############################################################################################
-## Writing the results (sample and snpFinalIndex)
+## Writing the results (sample and snpFinalIndex):
 startTime = datetime.datetime.now()
 print('-----------------------------------------------------------')
 print('Writing the results...')
-out_file1 = open('loci_'+str(region_size)+'kbp.txt', mode = 'w')
-out_file2 = open('loci_rs_'+str(region_size)+'kbp.txt', mode = 'w')
-out_file3 = open('lociPairs_'+str(region_size)+'kbp.txt', mode = 'w')
-out_file4 = open('lociPairs_rs_'+str(region_size)+'kbp.txt', mode = 'w')
-out_file5 = open('lociPairs_rs_reformated_'+str(region_size)+'kbp.txt', mode = 'w')
-out_file6 = open('lociRange_'+str(region_size)+'kbp.txt', mode = 'w')
+out_file1 = open('loci_'+str(region_size)+'kbp_'+str(p_thr) + '.txt', mode = 'w')
+out_file2 = open('loci_rs_'+str(region_size)+'kbp_'+str(p_thr) + '.txt', mode = 'w')
+out_file3 = open('lociPairs_'+str(region_size)+'kbp_'+str(p_thr) + '.txt', mode = 'w')
+out_file4 = open('lociPairs_rs_'+str(region_size)+'kbp_'+str(p_thr) + '.txt', mode = 'w')
+out_file5 = open('lociPairs_rs_reformated_'+str(region_size)+'kbp_'+str(p_thr) + '.txt', mode = 'w')
+out_file6 = open('lociRange_'+str(region_size)+'kbp_'+str(p_thr) + '.txt', mode = 'w')
 
 # Format of 'loci.txt': each line contains all the snps of a locus
 i = 0

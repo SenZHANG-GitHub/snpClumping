@@ -1,13 +1,17 @@
+# usage: py snp2region.py 200 5e-10
+# 200 means 200kbp
+# 5e-10 means the p value threshold
+
 import pdb, progressbar, sys
 from itertools import islice
 nslice = 20 
 
-if len(sys.argv) == 1:
-	print("err: please specify the range, e.g. py snp2region 200")
-rangename = "lociRange_" + sys.argv[1] + "kbp.txt"
+if not len(sys.argv) == 3:
+	print("err: please specify the range, e.g. py snp2region 200 5e-10")
+rangename = "lociRange_" + sys.argv[1] + "kbp_"+sys.argv[2]+".txt"
 mapname  = "MIGen_QC.map"
-resultname = "MIGen_range_snps_" + sys.argv[1] + "kbp.txt"
-resultname_rs = "MIGen_range_snps_" + sys.argv[1] + "kbp.txt"
+resultname = "MIGen_range_snps_" + sys.argv[1] + "kbp_"+sys.argv[2]+".txt"
+resultname_rs = "MIGen_range_snps_rs_" + sys.argv[1] + "kbp_"+sys.argv[2]+".txt"
 
 # rangefile: lociRange.txt: CHR STARTBP ENDBP
 

@@ -3,9 +3,9 @@ Procedure:
 1. InteractionRecords.txt -> results_BOOST.txt: ReOrderAndReIndex.py
 2. results_BOOST.txt -> loci files: clumpInteraction.py (Modify region_size, buffer_size, p_thr inside)
 3. loci files -> range_snps.txt, range_snps_rs.txt: snp2region.py
-4. range_snps_rs.txt/lociPairs.txt -> .sets and .snps: separateSets_allsnps.py (two versions)
-   -> separateSets_allsnp_truncated.py: Forced each set to have at most 31 (sqrt(1000)) snps by random sampling (because the R function mvtnorm can only handle 1<n<1000
-   -> separateSets_allsnp_noTruncated.py: Still output all snps related to the set files
+(usage: # usage: py snp2region.py 200 5e-10)
+4. range_snps_rs.txt, lociPairs.txt -> .set(s): separateSets_allsnps_truncated (Modify max_snps, the maximum number of snps inside a region inside, default: 31 (\sqrt{1000})
+5. Run rrintcc_BOOST for all .set files using --all, need to modify configName.txt
 
 -----------------------------------------------------------------------------------------
 file formats:

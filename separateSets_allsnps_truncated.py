@@ -5,12 +5,16 @@
 ################################################################################
 import datetime, sys, os, progressbar, random
 
-region_size = 200
+if not len(sys.argv) == 3:
+	print("err: please specify the range and p_thr, e.g. py separateSets_allsnps_truncated.py 200 5e-10")
+
+region_size = int(sys.argv[1])
+p_thr = sys.argv[2]
 max_snps 	= 31 # sqrt(1000)
 
-pathout = 'all_sets_'+str(region_size) + 'kbp_truncated'
-fname = 'MIGen_range_snps_rs_'+str(region_size)+'kbp.txt'
-pairname = 'lociPairs_'+str(region_size) + 'kbp.txt'
+pathout = 'all_sets_'+str(region_size) + 'kbp_truncated_'+p_thr
+fname = 'MIGen_range_snps_rs_'+str(region_size)+'kbp_'+p_thr+'.txt'
+pairname = 'lociPairs_'+str(region_size) + 'kbp_'+p_thr+'.txt'
 
 if os.path.exists(pathout):
 	os.system('rm -rf '+pathout+'/*.set')
